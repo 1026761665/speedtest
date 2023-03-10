@@ -86,10 +86,13 @@ speed_test(){
 		speedtest-cli/speedtest -p no -s $1 --accept-license --accept-gdpr > $speedLog 2>&1
 		is_upload=$(cat $speedLog | grep 'Upload')
 		if [[ ${is_upload} ]]; then
-	        local REDownload=$(cat $speedLog | awk -F ' ' '/Download/{print  $3}')
-	        local reupload=$(cat $speedLog | awk -F ' ' '/Upload/{print $3}')
-		local REDownload1=$(printf "%.0f" "$REDownload")
-		local reupload1=$(printf "%.0f" "$reupload")
+		local REDownload=$(awk -F ' ' '/Download/{print $3" "$3/8}' "$speedLog")
+		local reupload=$(awk -F ' ' '/Upload/{print $3" "$3/8}' "$speedLog")
+
+		local REDownload1=$(( ${REDownload#* } )))
+		local reupload1=$(( ${reupload#* } )) 
+
+
 	        local relatency=$(cat $speedLog | awk -F ' ' '/Latency/{print $2}')
 	        
 			local nodeID=$1
@@ -102,7 +105,7 @@ speed_test(){
 			
 			temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
 	        if [[ $(awk -v num1=${temp} -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') -eq 1 ]]; then
-	        	printf "${RED}%-6s${YELLOW}%s%s${GREEN}%-24s${CYAN}%s%-10s${BLUE}%s%-10s${PURPLE}%-8s${PLAIN}\n" "${nodeID}"  "${nodeISP}" "|" "${strnodeLocation:0:24}" "↑ " "${reupload}" "↓ " "${REDownload}" "${relatency} "  "↑ ${reupload1} " "↓ ${REDownload1} " | tee -a $log
+	        	printf "${RED}%-6s${YELLOW}%s%s${GREEN}%-24s${CYAN}%s%-10s${BLUE}%s%-10s${PURPLE}%-8s${PLAIN}\n" "${nodeID}"  "${nodeISP}" "|" "${strnodeLocation:0:24}" "↑ " "${reupload}" "↓ " "${REDownload}" "${relatency} " "↑ ${reupload1} " "↓ ${REDownload1} " | tee -a $log
 			fi
 		else
 	        local cerror="ERROR"
