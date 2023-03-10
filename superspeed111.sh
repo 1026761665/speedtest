@@ -86,11 +86,12 @@ speed_test(){
 		speedtest-cli/speedtest -p no -s $1 --accept-license --accept-gdpr > $speedLog 2>&1
 		is_upload=$(cat $speedLog | grep 'Upload')
 		if [[ ${is_upload} ]]; then
-		local REDownload=$(awk -F ' ' '/Download/{print $3" "$3/8}' "$speedLog")
-		local reupload=$(awk -F ' ' '/Upload/{print $3" "$3/8}' "$speedLog")
-
-		local REDownload1=$(( ${REDownload#* } )))
-		local reupload1=$(( ${reupload#* } )) 
+    	        local REDownload=$(cat $speedLog | awk -F ' ' '/Download/{print  $3}')
+	        local reupload=$(cat $speedLog | awk -F ' ' '/Upload/{print $3}')
+		local REDownload2=$(cat $speedLog | awk -F ' ' '/Download/{print $3/8}')
+		local reupload2=$(cat $speedLog | awk -F ' ' '/Upload/{print $3/8}')
+		local REDownload1=$(printf "%.0f" "$REDownload")
+		local reupload1=$(printf "%.0f" "$reupload") 
 
 
 	        local relatency=$(cat $speedLog | awk -F ' ' '/Latency/{print $2}')
