@@ -87,7 +87,9 @@ speed_test(){
 		is_upload=$(cat $speedLog | grep 'Upload')
 		if [[ ${is_upload} ]]; then
 	        local REDownload=$(cat $speedLog | awk -F ' ' '/Download/{print $3}')
+		local REDownload1=$(cat $speedLog | awk -F ' ' '/Download/{print $3/8}')
 	        local reupload=$(cat $speedLog | awk -F ' ' '/Upload/{print $3}')
+		local reupload1=$(cat $speedLog | awk -F ' ' '/Upload/{print $3/8}')
 	        local relatency=$(cat $speedLog | awk -F ' ' '/Latency/{print $2}')
 	        
 			local nodeID=$1
@@ -100,7 +102,7 @@ speed_test(){
 			
 			temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
 	        if [[ $(awk -v num1=${temp} -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') -eq 1 ]]; then
-	        	printf "${RED}%-6s${YELLOW}%s%s${GREEN}%-24s${CYAN}%s%-10s${BLUE}%s%-10s${PURPLE}%-8s${PLAIN}\n" "${nodeID}"  "${nodeISP}" "|" "${strnodeLocation:0:24}" "↑${reupload}/8" "${reupload}" "↓${REDownload}/8 " "${REDownload}" "${relatency}" | tee -a $log
+	        	printf "${RED}%-6s${YELLOW}%s%s${GREEN}%-24s${CYAN}%s%-10s${BLUE}%s%-10s${PURPLE}%-8s${PLAIN}\n" "${nodeID}"  "${nodeISP}" "|" "${strnodeLocation:0:24}" "↑${reupload1}m/s" "${reupload}" "↓${REDownload1}m/s " "${REDownload}" "${relatency}" | tee -a $log
 			fi
 		else
 	        local cerror="ERROR"
