@@ -88,8 +88,8 @@ speed_test(){
 		if [[ ${is_upload} ]]; then
     	        local REDownload=$(cat $speedLog | awk -F ' ' '/Download/{print  $3}')
 	        local reupload=$(cat $speedLog | awk -F ' ' '/Upload/{print $3}')
-		local 	REDownload1=$(( $(awk -F ' ' '/Download/{print $3}') / 8 ))
-		local 	reupload1=$(( $(awk -F ' ' '/Upload/{print $3}') / 8 ))
+		local REDownload1=$(echo "scale=2; $REDownload/8" | bc)
+		local reupload1=$(echo "scale=2; $reupload/8" | bc)
 
 
 	        local relatency=$(cat $speedLog | awk -F ' ' '/Latency/{print $2}')
