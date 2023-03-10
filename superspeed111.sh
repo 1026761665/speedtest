@@ -104,7 +104,7 @@ speed_test(){
 			
 			temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
 	        if [[ $(awk -v num1=${temp} -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') -eq 1 ]]; then
-	        	printf "${RED}%-6s${YELLOW}%s%s${GREEN}%-24s${CYAN}%s%-10s${BLUE}%s%-10s${PURPLE}%-8s${PLAIN}\n" "${nodeID}"  "${nodeISP}" "|" "${strnodeLocation:0:24}" "↑ " "${reupload}" "↓ " "${REDownload}" "${relatency} " "↑ ${reupload1} " "↓ ${REDownload1} " | tee -a $log
+	        	printf "${RED}%-6s${YELLOW}%s%s${GREEN}%-24s${CYAN}%s%-10s${BLUE}%s%-10s${PURPLE}%-8s${PLAIN}\n" "${nodeID}"  "${nodeISP}" "|" "${strnodeLocation:0:24}" "↑ " "${reupload}" "↓ " "${REDownload}" "${relatency} " "    ↑ ${reupload1}m/s " "    ↓ ${REDownload1}m/s " | tee -a $log
 			fi
 		else
 	        local cerror="ERROR"
@@ -136,8 +136,8 @@ runtest() {
 	[[ ${selection} == 0 ]] && exit 1
 
 	if [[ ${selection} == 1 ]]; then
-		echo "—————————————————————————————————————————————————————————————————————————————————————"
-		echo "ID    测速服务器信息       上传/Mbps   下载/Mbps   延迟/ms  上传m/s   下载m/s"
+		echo "———————————————————————————————————————————————————————————————"
+		echo "ID    测速服务器信息       上传/Mbps   下载/Mbps   延迟/ms  "
 		start=$(date +%s) 
 
 		#speed_test '27377' '北京５Ｇ' '电信'
