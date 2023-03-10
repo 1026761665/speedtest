@@ -104,7 +104,7 @@ speed_test(){
 			
 			temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
 	        if [[ $(awk -v num1=${temp} -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') -eq 1 ]]; then
-	        	printf "${RED}%-6s${YELLOW}%s%s${GREEN}%-24s${CYAN}%s%-10s${BLUE}%s%-10s${PURPLE}%-8s${PLAIN}\n" "${nodeID}"  "${nodeISP}" "|" "${strnodeLocation:0:24}" "↑ " "${reupload}" "↓ " "${REDownload}" "${relatency} " "                        ↑ ${reupload1}m/s " "    ↓ ${REDownload1}m/s " | tee -a $log
+	        	printf "${RED}%-6s${YELLOW}%s%s${GREEN}%-24s${CYAN}%s%-10s${BLUE}%s%-10s${PURPLE}%-8s${PLAIN}\n" "${nodeID}"  "${nodeISP}" "|" "${strnodeLocation:0:24}" "↑ " "${reupload}" "↓ " "${REDownload}" "${relatency} " "                          ↑ ${reupload1}m/s " "    ↓ ${REDownload1}m/s " | tee -a $log
 			fi
 		else
 	        local cerror="ERROR"
@@ -113,7 +113,7 @@ speed_test(){
 
 preinfo() {
 	echo "——————————————————————————————————————————————————————————"
-	echo " speedtest 广东测速版0.1v "
+	echo " speedtest 广东测速版0.2v "
 	echo " 广东节点更新: 2023/3/10 | 脚本更新: 2023/3/10"
 	echo " "
 	echo "——————————————————————————————————————————————————————————"
