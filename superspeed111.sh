@@ -151,6 +151,7 @@ runtest() {
 		speed_test '4515' '广东深圳' '移动'
 		speed_test '4547' '广东深圳' '电信'
 		speed_test '4595' '广东中山' '联通'
+		speed_test '4899' '广东惠州' '电信'
 		speed_test '5083' '广东东莞' '电信'
 		speed_test '6611' '广东广州' '移动'
 		speed_test '27605' '广东汕尾' '电信'
@@ -186,7 +187,7 @@ runtest() {
 		speed_test '35243' '广东梅州' '移动'
 		speed_test '36425' '广东清远' '电信'
 		speed_test '37089' '广东广州' '联通'
-		speed_test '4899' '广东惠州' '电信'
+
 		speed_test '27824' '广东深圳５Ｇ' '电信'
 		speed_test '28463' '广东佛山５Ｇ' '电信'
 		speed_test '27835' '广东东莞５Ｇ' '电信'
